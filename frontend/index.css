@@ -98,25 +98,17 @@ a {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  background-color: #0d5633;
 }
 
-.bg-scene-hero, .bg-scene-palms, .bg-scene-team {
+.bg-scene-hero {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
-  opacity: 0.22;
-  mix-blend-mode: luminosity;
+  opacity: 0.95;
   transition: opacity 0.5s ease;
-}
-
-.bg-scene-palms {
-  opacity: 0.18;
-}
-
-.bg-scene-team {
-  opacity: 0.14;
 }
 
 .sun-glow {
@@ -127,8 +119,9 @@ a {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, #FFE600 0%, rgba(255, 230, 0, 0.25) 50%, transparent 80%);
-  opacity: 0.6;
+  background: radial-gradient(circle, #FFE600 0%, rgba(255, 230, 0, 0.2) 40%, transparent 75%);
+  opacity: 0.45;
+  mix-blend-mode: soft-light;
 }
 
 .wave-lines-bottom {
