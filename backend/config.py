@@ -63,4 +63,8 @@ class Settings(BaseModel):
     MAX_HALLUCINATION_SCORE: float = 0.45   # Hallucination score above this rejects answer
     OFF_TOPIC_RELEVANCE_FLOOR: float = 0.22
 
+    # Standard Grounding Refusal Message when query is not related to dataset context
+    DEFAULT_UNGROUNDED_RESPONSE: str = "I couldn’t find sufficient information in the provided dataset to answer this question."
+
 settings = Settings()
+

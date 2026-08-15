@@ -89,22 +89,64 @@ class GuardrailsEngine:
         )
 
     # =========================================================================
-    # Stage 2: Post-Retrieval Relevance Floor Check
+    # Stage 2: Post-Retrieval Relevance Floor & Keyword Verification Check
     # =========================================================================
-    def check_retrieval_relevance(self, query: str, top_score: float) -> GuardrailVerdict:
+    def check_retrieval_relevance(
+        self, 
+        query: str, 
+        top_score: float, 
+        retrieved_contexts: Optional[List[str]] = None
+    ) -> GuardrailVerdict:
         t0 = time.perf_counter()
-        elapsed = (time.perf_counter() - t0) * 1000.0
+        
+        # Extract query content keywords
+        words = re.findall(r'[\w\u0900-\u0D7F]+', query.lower())
+        stopwords = {
+            "what", "is", "the", "of", "in", "and", "to", "a", "an", "are", "for", "with", "on", "at", "by", "from",
+            "this", "that", "it", "as", "be", "was", "or", "which", "how", "who", "when", "where", "why", "can", "does",
+            "did", "do", "will", "would", "should", "could", "about", "into", "than", "then", "so", "if", "has", "have",
+            "had", "been", "its", "their", "there", "they", "we", "he", "she", "you", "me", "my", "your", "his", "her",
+            "tell", "explain", "give", "some", "between",
+            "क्या", "है", "हैं", "और", "का", "के", "की", "में", "से", "को", "पर", "यह", "वह", "इस", "उस", "था", "थी", "थे",
+            "होता", "होती", "होते", "करना", "करते", "लिए", "द्वारा", "कब", "कहाँ", "कैसे", "किस", "कौन", "कितना"
+        }
+        q_kws = [w for w in words if len(w) > 1 and w not in stopwords]
+
+        # Check keyword presence in top retrieved contexts
+        if retrieved_contexts and q_kws:
+            combined = " ".join(retrieved_contexts).lower()
+            matched = sum(1 for kw in q_kws if kw in combined)
+            ratio = matched / len(q_kws)
+            
+            # For off-topic rejection: If key subject nouns are missing from retrieved passages
+            if len(q_kws) <= 2:
+                is_off_topic = (ratio < 0.75 or top_score < 0.30)
+            else:
+                is_off_topic = (ratio < 0.50 or top_score < 0.28)
+
+            if is_off_topic:
+                elapsed = (time.perf_counter() - t0) * 1000.0
+                return GuardrailVerdict(
+                    passed=False,
+                    stage="retrieval_relevance",
+                    status="BLOCKED_OFF_TOPIC",
+                    reason=f"Query is not related to the dataset context (similarity: {top_score:.3f}, keyword alignment: {ratio:.2f}).",
+                    risk_score=round(1.0 - top_score, 3),
+                    latency_ms=round(elapsed, 3)
+                )
 
         if top_score < settings.MIN_SIMILARITY_THRESHOLD:
+            elapsed = (time.perf_counter() - t0) * 1000.0
             return GuardrailVerdict(
                 passed=False,
                 stage="retrieval_relevance",
                 status="BLOCKED_OFF_TOPIC",
-                reason=f"Top retrieved context similarity ({top_score:.3f}) is below confidence threshold ({settings.MIN_SIMILARITY_THRESHOLD}). Query is likely off-topic.",
+                reason=f"Top retrieved context similarity ({top_score:.3f}) is below confidence threshold ({settings.MIN_SIMILARITY_THRESHOLD}). Query is not related to the dataset.",
                 risk_score=round(1.0 - top_score, 3),
                 latency_ms=round(elapsed, 3)
             )
 
+        elapsed = (time.perf_counter() - t0) * 1000.0
         return GuardrailVerdict(
             passed=True,
             stage="retrieval_relevance",

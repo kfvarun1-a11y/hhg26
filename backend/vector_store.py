@@ -26,6 +26,17 @@ class RetrievalResult(BaseModel):
     rank: int
     context_text: str  # Either child text or rich parent context
 
+# Multilingual & Indic Stopwords to filter out non-discriminative terms in sparse & dense scoring
+INDIC_AND_ENGLISH_STOPWORDS = {
+    "what", "is", "the", "of", "in", "and", "to", "a", "an", "are", "for", "with", "on", "at", "by", "from",
+    "this", "that", "it", "as", "be", "was", "or", "which", "how", "who", "when", "where", "why", "can", "does",
+    "did", "do", "will", "would", "should", "could", "about", "into", "than", "then", "so", "if", "has", "have",
+    "had", "been", "its", "their", "there", "they", "we", "he", "she", "you", "me", "my", "your", "his", "her",
+    "tell", "explain", "give", "some", "between",
+    "क्या", "है", "हैं", "और", "का", "के", "की", "में", "से", "को", "पर", "यह", "वह", "इस", "उस", "था", "थी", "थे",
+    "होता", "होती", "होते", "करना", "करते", "लिए", "द्वारा", "कब", "कहाँ", "कैसे", "किस", "कौन", "कितना"
+}
+
 class MultilingualVectorizer:
     """
     High-performance multilingual dense embedder.
@@ -47,17 +58,21 @@ class MultilingualVectorizer:
             return self.cache[text_clean]
 
         vec = np.zeros(self.dim, dtype=np.float32)
-        words = text_clean.split()
+        words = [w for w in text_clean.split() if w not in INDIC_AND_ENGLISH_STOPWORDS]
+        if not words:
+            words = text_clean.split()
         
         # Word features
         for w in words:
             idx = self._hash_ngram(w)
-            vec[idx] += 1.8
+            vec[idx] += 2.0
 
         # Multilingual character n-grams (handles Indic prefixes/suffixes and cross-lingual phonetics)
         for n in (3, 4, 5):
             for i in range(max(1, len(text_clean) - n + 1)):
                 ngram = text_clean[i: i + n]
+                if ngram.isspace():
+                    continue
                 idx = self._hash_ngram(ngram)
                 weight = 1.0 / math.sqrt(n)
                 vec[idx] += weight
@@ -93,10 +108,11 @@ class BM25Index:
         self.corpus_size: int = 0
 
     def _tokenize(self, text: str) -> List[str]:
-        # Tokenize by whitespace and punctuation, plus 3-gram character subwords
-        tokens = [t.lower() for t in text.split() if len(t) > 1]
-        char_ngrams = [text[i:i+3].lower() for i in range(len(text)-2)]
-        return tokens + char_ngrams[:50]
+        import re
+        words = re.findall(r'[\w\u0900-\u0D7F]+', text.lower())
+        filtered_words = [w for w in words if len(w) > 1 and w not in INDIC_AND_ENGLISH_STOPWORDS]
+        char_ngrams = [text[i:i+3].lower() for i in range(len(text)-2) if not text[i:i+3].isspace()]
+        return filtered_words + char_ngrams[:40]
 
     def build(self, documents: List[str]):
         self.corpus_size = len(documents)
@@ -124,12 +140,14 @@ class BM25Index:
     def score(self, query: str) -> np.ndarray:
         query_tokens = self._tokenize(query)
         scores = np.zeros(self.corpus_size, dtype=np.float32)
+        max_possible = 0.0
 
         for q in query_tokens:
             if q not in self.inverted_index:
                 continue
             df = self.doc_freqs[q]
             idf = math.log(1.0 + (self.corpus_size - df + 0.5) / (df + 0.5))
+            max_possible += idf * (self.k1 + 1)
             
             for doc_idx, freq in self.inverted_index[q]:
                 doc_len = self.doc_lens[doc_idx]
@@ -137,10 +155,9 @@ class BM25Index:
                 denominator = freq + self.k1 * (1 - self.b + self.b * (doc_len / self.avg_doc_len))
                 scores[doc_idx] += idf * (numerator / denominator)
 
-        # Normalize 0 to 1
-        max_s = np.max(scores) if len(scores) > 0 else 0
-        if max_s > 0:
-            scores = scores / max_s
+        # Calibrate score by theoretical query max
+        if max_possible > 0:
+            scores = scores / max_possible
         return scores
 
 class HybridVectorStore:
@@ -151,6 +168,12 @@ class HybridVectorStore:
         self.dense_matrix: Optional[np.ndarray] = None
         self.is_indexed: bool = False
 
+    def _chunk_searchable_text(self, chunk: Chunk) -> str:
+        meta = chunk.metadata or {}
+        q = meta.get("query", "")
+        orig_en = meta.get("original_english", "")
+        return f"{chunk.text} {q} {orig_en}".strip()
+
     def index_chunks(self, chunks: List[Chunk]):
         """Builds in-memory dense vector matrix and sparse BM25 index."""
         t0 = time.perf_counter()
@@ -158,10 +181,10 @@ class HybridVectorStore:
         if not chunks:
             self.dense_matrix = None
             self.is_indexed = False
-            return
+            return 0.0
 
-        # 1. Build Dense Matrix
-        texts = [c.text for c in chunks]
+        # 1. Build Dense Matrix with enriched searchable text (passage + query + original_english)
+        texts = [self._chunk_searchable_text(c) for c in chunks]
         self.dense_matrix = self.vectorizer.encode_batch(texts)  # shape: [N, 384]
 
         # 2. Build Sparse BM25 Index

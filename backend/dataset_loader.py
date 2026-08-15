@@ -204,6 +204,48 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "topic": "National Heritage",
             "original_english": "Who composed the National Anthem of India?"
         }
+    },
+    # Marathi (mr)
+    {
+        "id": "msmarco-mr-6001",
+        "query": "महाराष्ट्राची राजधानी कोणती आहे?",
+        "passage_text": "मुंबई ही भारताच्या महाराष्ट्र राज्याची राजधानी असून ती भारताची आर्थिक राजधानी मानली जाते. मुंबई हे अरबी समुद्राच्या किनाऱ्यावर वसलेले भारतातील सर्वात मोठे महानगर आहे.",
+        "answers": ["मुंबई ही महाराष्ट्राची राजधानी आहे."],
+        "metadata": {
+            "passage_id": "mr-pass-6001",
+            "query_id": "mr-q-6001",
+            "language": "mr",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Maharashtra? Mumbai is the capital of Maharashtra."
+        }
+    },
+    # Kannada (kn)
+    {
+        "id": "msmarco-kn-7001",
+        "query": "ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಯಾವುದು?",
+        "passage_text": "ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಮತ್ತು ಭಾರತದ ಪ್ರಮುಖ ಮಾಹಿತಿ ತಂತ್ರಜ್ಞಾನ (IT) ಕೇಂದ್ರವಾಗಿದೆ. ಇದನ್ನು ಭಾರತದ ಸಿಲಿಕಾನ್ ವ್ಯಾಲಿ ಎಂದು ಕರೆಯಲಾಗುತ್ತದೆ.",
+        "answers": ["ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ."],
+        "metadata": {
+            "passage_id": "kn-pass-7001",
+            "query_id": "kn-q-7001",
+            "language": "kn",
+            "topic": "Geography & Technology Hubs",
+            "original_english": "What is the capital of Karnataka? Bengaluru is the capital of Karnataka."
+        }
+    },
+    # Gujarati (gu)
+    {
+        "id": "msmarco-gu-8001",
+        "query": "ગુજરાતનું પાટનગર કયું છે?",
+        "passage_text": "ગાંધીનગર ગુજરાત રાજ્યનું પાટનગર છે, જેનું નામ રાષ્ટ્રપિતા મહાત્મા ગાંધીના નામ પરથી રાખવામાં આવ્યું છે. તે સાબરમતી નદીના કિનારે આવેલું સુઆયોજિત શહેર છે.",
+        "answers": ["ગાંધીનગર ગુજરાતનું પાટનગર છે."],
+        "metadata": {
+            "passage_id": "gu-pass-8001",
+            "query_id": "gu-q-8001",
+            "language": "gu",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Gujarat? Gandhinagar is the capital of Gujarat."
+        }
     }
 ]
 

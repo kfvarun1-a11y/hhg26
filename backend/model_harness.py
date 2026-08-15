@@ -138,7 +138,7 @@ class ModelHarness:
         """
         if not retrieval_results:
             return (
-                "मुझे प्रदान किए गए ज्ञानकोष में इस प्रश्न के लिए पर्याप्त जानकारी नहीं मिली। (No relevant information found in knowledge base.)",
+                settings.DEFAULT_UNGROUNDED_RESPONSE,
                 [],
                 0.0
             )
@@ -165,15 +165,18 @@ class ModelHarness:
         if not api_key:
             raise ValueError("GROQ_API_KEY is not set.")
 
-        prompt = f"""You are a strict, grounded multilingual question-answering assistant for ai4bharat/MSMARCO-XI.
-Answer the user query based ONLY on the provided context passages below. If the context does not contain the answer, state that you do not know. Do not hallucinate.
+        prompt = f"""You are a strict, grounded multilingual question-answering assistant for the ai4bharat/MSMARCO-XI dataset.
+Answer the user query based ONLY on the provided context passages below.
+If the context passages do not contain sufficient information to answer the question, or if the question is not related to the context in the dataset, you MUST respond EXACTLY with:
+"I couldn’t find sufficient information in the provided dataset to answer this question."
+Do not hallucinate or make up any information outside the provided passages.
 
 Context Passages:
 {"\n---\n".join(contexts)}
 
 User Query: {query}
 
-Provide a concise, direct answer in the same language as the query."""
+Provide the answer based strictly on the context passages above:"""
 
         url = "https://api.groq.com/openai/v1/chat/completions"
         headers = {
@@ -210,12 +213,12 @@ Provide a concise, direct answer in the same language as the query."""
         tool_records: List[ToolCallRecord] = []
         retries = 0
 
-        # If Input or Relevance Guardrail already blocked, construct safe refusal
+        # If Input or Relevance Guardrail already blocked, construct standard ungrounded refusal
         if not preliminary_verdict.passed:
             t_gen_elapsed = (time.perf_counter() - t_gen_start) * 1000.0
             return StructuredRAGResponse(
                 query=query,
-                answer=f"अनुरोध संसाधित नहीं किया जा सका: {preliminary_verdict.reason} (I cannot answer this request as it is off-topic, ungrounded, or violates safety guidelines.)",
+                answer=settings.DEFAULT_UNGROUNDED_RESPONSE,
                 grounded_facts=[],
                 citations=[],
                 confidence_score=0.0,
@@ -318,7 +321,7 @@ Provide a concise, direct answer in the same language as the query."""
         if not output_verdict.passed:
             return StructuredRAGResponse(
                 query=query,
-                answer=f"उत्तर अस्वीकृत: उत्तर दिए गए संदर्भ से पूरी तरह सत्यापित नहीं है (Grounding check failed). {output_verdict.reason}",
+                answer=settings.DEFAULT_UNGROUNDED_RESPONSE,
                 grounded_facts=[],
                 citations=citations_payload,
                 confidence_score=0.0,

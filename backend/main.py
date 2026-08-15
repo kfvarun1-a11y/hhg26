@@ -140,9 +140,14 @@ async def run_rag_pipeline(
     embedding_ms = ret_ms * 0.4  # estimated embedding portion of search
     retrieval_db_ms = ret_ms * 0.6
 
-    # 3. Stage 2 Guardrail: Retrieval Relevance Threshold
+    # 3. Stage 2 Guardrail: Retrieval Relevance & Keyword Grounding Threshold
     top_score = retrieval_results[0].score if retrieval_results else 0.0
-    rel_verdict = guardrails_engine.check_retrieval_relevance(query_text, top_score)
+    retrieved_contexts = [r.context_text for r in retrieval_results]
+    rel_verdict = guardrails_engine.check_retrieval_relevance(
+        query=query_text, 
+        top_score=top_score, 
+        retrieved_contexts=retrieved_contexts
+    )
 
     if not rel_verdict.passed:
         t_total = (time.perf_counter() - t_start) * 1000.0

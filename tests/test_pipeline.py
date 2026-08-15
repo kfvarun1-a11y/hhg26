@@ -125,6 +125,75 @@ def test_model_harness_execution():
 
     asyncio.run(_test())
 
+def test_end_to_end_voice_and_refusal():
+    """
+    Tests:
+    1. Relevant questions retrieve context and return grounded answers.
+    2. Questions not related to the dataset return EXACTLY:
+       'I couldn’t find sufficient information in the provided dataset to answer this question.'
+    """
+    from backend.main import run_rag_pipeline
+    from backend.stt_service import STTResult
+
+    async def _test_e2e():
+        # 1. Relevant Hindi Query
+        q_rel_hi = "भारत की राजधानी क्या है?"
+        stt_hi = STTResult(
+            transcript=q_rel_hi,
+            language_code="hi-IN",
+            provider="sarvam",
+            confidence=0.98,
+            audio_duration_sec=1.5,
+            stt_latency_ms=18.0
+        )
+        res_hi = await run_rag_pipeline(q_rel_hi, language="hi", stt_result=stt_hi)
+        assert res_hi.safety_verdict == "PASSED", f"Expected PASSED but got {res_hi.safety_verdict}"
+        assert "दिल्ली" in res_hi.answer or "Delhi" in res_hi.answer
+        assert len(res_hi.citations) > 0
+        print(f"✓ Relevant Hindi Query Passed: {res_hi.answer[:60]}...")
+
+        # 2. Relevant English Query
+        q_rel_en = "What causes the northern lights?"
+        stt_en = STTResult(
+            transcript=q_rel_en,
+            language_code="en",
+            provider="elevenlabs",
+            confidence=0.96,
+            audio_duration_sec=1.8,
+            stt_latency_ms=22.0
+        )
+        res_en = await run_rag_pipeline(q_rel_en, language="en", stt_result=stt_en)
+        assert res_en.safety_verdict == "PASSED"
+        assert "solar" in res_en.answer.lower() or "aurora" in res_en.answer.lower() or "charged" in res_en.answer.lower()
+        print(f"✓ Relevant English Query Passed: {res_en.answer[:60]}...")
+
+        # 3. Off-Topic / Unrelated Query (Must return exact required refusal string)
+        exact_expected_refusal = "I couldn’t find sufficient information in the provided dataset to answer this question."
+        
+        off_topic_queries = [
+            "How to make pasta with white sauce at home?",
+            "Who won the 1994 FIFA world cup final?",
+            "What is the stock price of Tesla today?",
+            "Tell me a bedtime story about dragons"
+        ]
+
+        for q_off in off_topic_queries:
+            stt_off = STTResult(
+                transcript=q_off,
+                language_code="en",
+                provider="fast_sync_stt",
+                confidence=0.95,
+                audio_duration_sec=1.2,
+                stt_latency_ms=15.0
+            )
+            res_off = await run_rag_pipeline(q_off, language="en", stt_result=stt_off)
+            assert res_off.answer == exact_expected_refusal, (
+                f"For off-topic query '{q_off}', expected exact refusal '{exact_expected_refusal}' but got '{res_off.answer}'"
+            )
+            print(f"✓ Off-Topic Refusal Passed for '{q_off[:35]}...' -> '{res_off.answer}'")
+
+    asyncio.run(_test_e2e())
+
 if __name__ == "__main__":
     print("Running Voice RAG Pipeline Test Suite...")
     test_dataset_loader()
@@ -132,4 +201,5 @@ if __name__ == "__main__":
     test_vector_store_retrieval()
     test_guardrails_safety_and_injections()
     test_model_harness_execution()
+    test_end_to_end_voice_and_refusal()
     print("\n🎉 ALL TESTS PASSED SUCCESSFULLY!")
