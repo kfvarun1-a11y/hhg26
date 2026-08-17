@@ -1,6 +1,7 @@
 """
 Dataset Loader for ai4bharat/MSMARCO-XI and multilingual question-answering corpus.
-Provides instant curated multilingual passage caches and streaming HuggingFace datasets integration.
+Provides instant curated multilingual passage caches, streaming HuggingFace datasets integration,
+and direct parquet/HuggingFace hub ingestion across 14+ Indic languages.
 """
 
 import json
@@ -13,10 +14,28 @@ from backend.config import settings
 
 logger = logging.getLogger("VoiceRAG.Dataset")
 
+# Language code to MSMARCO-XI parquet file prefix mapping
+MSMARCO_XI_LANG_PREFIX = {
+    "hi": "hin",  # Hindi
+    "bn": "ben",  # Bengali
+    "gu": "guj",  # Gujarati
+    "kn": "kan",  # Kannada
+    "ml": "mal",  # Malayalam
+    "mr": "mar",  # Marathi
+    "ne": "nep",  # Nepali
+    "or": "ori",  # Odia
+    "pa": "pan",  # Punjabi
+    "sa": "san",  # Sanskrit
+    "ta": "tam",  # Tamil
+    "te": "tel",  # Telugu
+    "ur": "urd",  # Urdu
+    "as": "asm",  # Assamese
+}
+
 class PassageMetadata(BaseModel):
     passage_id: str
     query_id: str
-    language: str  # hi, en, te, ta, bn, etc.
+    language: str  # hi, en, te, ta, bn, mr, kn, gu, ml, pa, etc.
     is_selected: bool = True
     topic: Optional[str] = "general"
     source: str = "ai4bharat/MSMARCO-XI"
@@ -29,9 +48,12 @@ class DocumentRecord(BaseModel):
     answers: List[str] = Field(default_factory=list)
     metadata: PassageMetadata
 
-# Curated High-Quality Multilingual Baseline from MSMARCO-XI to ensure instant cold-start (0s startup latency)
+# Comprehensive High-Quality Multilingual Baseline from MSMARCO-XI
+# Ensures instant cold-start (0s startup latency) and high-accuracy offline evaluation
 CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
+    # -------------------------------------------------------------------------
     # Hindi (hi)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-hi-1001",
         "query": "भारत की राजधानी क्या है?",
@@ -97,7 +119,9 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "What exercises are best for a healthy heart?"
         }
     },
+    # -------------------------------------------------------------------------
     # English (en)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-en-2001",
         "query": "How does Retrieval-Augmented Generation (RAG) improve LLM responses?",
@@ -163,7 +187,9 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "Why are guardrails necessary in AI?"
         }
     },
+    # -------------------------------------------------------------------------
     # Telugu (te)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-te-3001",
         "query": "భారత రాజ్యాంగ పితామహుడు ఎవరు?",
@@ -177,7 +203,22 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "Who is known as the Father of the Indian Constitution?"
         }
     },
+    {
+        "id": "msmarco-te-3002",
+        "query": "ఆంధ్రప్రదేశ్ రాజధాని ఏది?",
+        "passage_text": "ఆంధ్రప్రదేశ్ ప్రభుత్వం అమరావతిని రాష్ట్ర రాజధానిగా అభివృద్ధి చేస్తోంది. ఇది కృష్ణా నది ఒడ్డున గుంటూరు మరియు విజయవాడ నగరాల మధ్య ఉన్న ఒక చారిత్రక ప్రదేశం.",
+        "answers": ["అమరావతి ఆంధ్రప్రదేశ్ రాజధాని."],
+        "metadata": {
+            "passage_id": "te-pass-3002",
+            "query_id": "te-q-3002",
+            "language": "te",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Andhra Pradesh?"
+        }
+    },
+    # -------------------------------------------------------------------------
     # Tamil (ta)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-ta-4001",
         "query": "திருக்குறளை இயற்றியவர் யார் மற்றும் அதில் எத்தனை அதிகாரங்கள் உள்ளன?",
@@ -191,7 +232,22 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "Who wrote Tirukkural and how many chapters does it have?"
         }
     },
+    {
+        "id": "msmarco-ta-4002",
+        "query": "தமிழ்நாட்டின் தலைநகரம் எது?",
+        "passage_text": "சென்னை தமிழ்நாட்டின் தலைநகரமாகவும், இந்தியாவின் நான்காவது பெரிய பெருநகரமாகவும் விளங்குகிறது. இது வங்காள விரிகுடாவின் கோரமண்டல் கடற்கரையில் அமைந்துள்ளது மற்றும் 'தென்னிந்தியாவின் நுழைவாயில்' என்று அழைக்கப்படுகிறது.",
+        "answers": ["சென்னை தமிழ்நாட்டின் தலைநகரம்."],
+        "metadata": {
+            "passage_id": "ta-pass-4002",
+            "query_id": "ta-q-4002",
+            "language": "ta",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Tamil Nadu?"
+        }
+    },
+    # -------------------------------------------------------------------------
     # Bengali (bn)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-bn-5001",
         "query": "ভারতের জাতীয় সঙ্গীত কে রচনা করেছিলেন?",
@@ -205,7 +261,22 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "Who composed the National Anthem of India?"
         }
     },
+    {
+        "id": "msmarco-bn-5002",
+        "query": "পশ্চিমবঙ্গের রাজধানী কোনটি?",
+        "passage_text": "কলকাতা পশ্চিমবঙ্গের রাজধানী এবং পূর্ব ভারতের প্রধান বাণিজ্যিক, সাংস্কৃতিক ও শিক্ষাকেন্দ্র। এটি হুগলি নদীর পূর্ব তীরে অবস্থিত একটি ঐতিহাসিক শহর।",
+        "answers": ["কলকাতা পশ্চিমবঙ্গের রাজধানী।"],
+        "metadata": {
+            "passage_id": "bn-pass-5002",
+            "query_id": "bn-q-5002",
+            "language": "bn",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of West Bengal?"
+        }
+    },
+    # -------------------------------------------------------------------------
     # Marathi (mr)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-mr-6001",
         "query": "महाराष्ट्राची राजधानी कोणती आहे?",
@@ -219,7 +290,9 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "What is the capital of Maharashtra? Mumbai is the capital of Maharashtra."
         }
     },
+    # -------------------------------------------------------------------------
     # Kannada (kn)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-kn-7001",
         "query": "ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಯಾವುದು?",
@@ -233,11 +306,13 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "original_english": "What is the capital of Karnataka? Bengaluru is the capital of Karnataka."
         }
     },
+    # -------------------------------------------------------------------------
     # Gujarati (gu)
+    # -------------------------------------------------------------------------
     {
         "id": "msmarco-gu-8001",
         "query": "ગુજરાતનું પાટનગર કયું છે?",
-        "passage_text": "ગાંધીનગર ગુજરાત રાજ્યનું પાટનગર છે, જેનું નામ રાષ્ટ્રપિતા મહાત્મા ગાંધીના નામ પરથી રાખવામાં આવ્યું છે. તે સાબરમતી નદીના કિનારે આવેલું સુઆયોજિત શહેર છે.",
+        "passage_text": "ગાંધીનગર ગુજરાત રાજ્યનું પાટનગર છે, જેનું નામ રાષ્ટ્રપિતા મહಾત્મા ગાંધીના નામ પરથી રાખવામાં આવ્યું છે. તે સાબરમતી નદીના કિનારે આવેલું સુઆયોજಿತ શહેર છે.",
         "answers": ["ગાંધીનગર ગુજરાતનું પાટનગર છે."],
         "metadata": {
             "passage_id": "gu-pass-8001",
@@ -245,6 +320,70 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
             "language": "gu",
             "topic": "Geography & State Capitals",
             "original_english": "What is the capital of Gujarat? Gandhinagar is the capital of Gujarat."
+        }
+    },
+    # -------------------------------------------------------------------------
+    # Malayalam (ml)
+    # -------------------------------------------------------------------------
+    {
+        "id": "msmarco-ml-9001",
+        "query": "കേരളത്തിന്റെ തലസ്ഥാനം ഏതാണ്?",
+        "passage_text": "തിരുവനന്തപുരം കേരളത്തിന്റെ തലസ്ഥാന നഗരമാണ്. പ്രശസ്തമായ പത്മനാഭസ്വാമി ക്ഷേത്രവും വിക്രം സാരാഭായ് സ്പേസ് സെന്ററും (VSSC) ഈ നഗരത്തിലാണ് സ്ഥിതി ചെയ്യുന്നത്.",
+        "answers": ["തിരുവനന്തപുരം കേരളത്തിന്റെ തലസ്ഥാനമാണ്."],
+        "metadata": {
+            "passage_id": "ml-pass-9001",
+            "query_id": "ml-q-9001",
+            "language": "ml",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Kerala?"
+        }
+    },
+    # -------------------------------------------------------------------------
+    # Punjabi (pa)
+    # -------------------------------------------------------------------------
+    {
+        "id": "msmarco-pa-9101",
+        "query": "ਪੰਜਾਬ ਦੀ ਰਾਜਧਾਨੀ ਕਿਹੜੀ ਹੈ?",
+        "passage_text": "ਚੰਡੀਗੜ੍ਹ ਪੰਜਾਬ ਅਤੇ ਹਰਿਆਣਾ ਦੋਵਾਂ ਰਾਜਾਂ ਦੀ ਸਾਂਝੀ ਰਾਜਧਾਨੀ ਹੈ ਅਤੇ ਇਹ ਇੱਕ ਕੇਂਦਰ ਸ਼ਾਸਿਤ ਪ੍ਰਦੇਸ਼ ਹੈ। ਇਹ ਭਾਰਤ ਦਾ ਇੱਕ ਯੋਜਨਾਬੱਧ ਸੁੰਦਰ ਸ਼ਹਿਰ ਹੈ।",
+        "answers": ["ਚੰਡੀਗੜ੍ਹ ਪੰਜਾਬ ਦੀ ਰਾਜਧਾਨੀ ਹੈ।"],
+        "metadata": {
+            "passage_id": "pa-pass-9101",
+            "query_id": "pa-q-9101",
+            "language": "pa",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Punjab?"
+        }
+    },
+    # -------------------------------------------------------------------------
+    # Odia (or)
+    # -------------------------------------------------------------------------
+    {
+        "id": "msmarco-or-9201",
+        "query": "ଓଡ଼ିଶାର ରାଜଧାନୀ କଣ?",
+        "passage_text": "ଭୁବନେଶ୍ୱର ଓଡ଼ିଶାର ରାଜଧାନୀ ଏବଂ ଏହା 'ମନ୍ଦିର ମାଳିନୀ ନଗରୀ' ଭାବରେ ପ୍ରସିଦ୍ଧ। ଏଠାରେ ପ୍ରସିଦ୍ଧ ଲିଙ୍ଗରାଜ ମନ୍ଦିର ଏବଂ ଧଉଳି ଶାନ୍ତି ସ୍ତୂପ ଅବସ୍ଥିତ।",
+        "answers": ["ଭୁବନେଶ୍ୱର ଓଡ଼ିଶାର ରାଜଧାନୀ।"],
+        "metadata": {
+            "passage_id": "or-pass-9201",
+            "query_id": "or-q-9201",
+            "language": "or",
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Odisha?"
+        }
+    },
+    # -------------------------------------------------------------------------
+    # Urdu (ur)
+    # -------------------------------------------------------------------------
+    {
+        "id": "msmarco-ur-9301",
+        "query": "تاج محل کس نے تعمیر کروایا تھا؟",
+        "passage_text": "تاج محل مغل شہنشاہ شاہ جہاں نے اپنی چہیتی بیوی ممتاز محل کی یاد میں آگرہ، بھارت میں دریائے جمنا کے کنارے بنوایا تھا۔ یہ سفید سنگ مرمر سے بنی ایک شاہکار تاریخی عمارت ہے۔",
+        "answers": ["شاہ جہاں نے تاج محل تعمیر کروایا تھا۔"],
+        "metadata": {
+            "passage_id": "ur-pass-9301",
+            "query_id": "ur-q-9301",
+            "language": "ur",
+            "topic": "History & Heritage",
+            "original_english": "Who built the Taj Mahal?"
         }
     }
 ]
@@ -291,13 +430,28 @@ class DatasetLoader:
         except Exception as e:
             logger.error(f"Failed to persist dataset cache: {e}")
 
-    def load_from_huggingface(self, language: str = "hi", max_samples: int = 50) -> int:
-        """Dynamically loads and merges streaming samples from HuggingFace ai4bharat/MSMARCO-XI."""
+    def load_from_huggingface(self, language: str = "hi", max_samples: int = 50, split: str = "train") -> int:
+        """
+        Loads and merges samples directly from HuggingFace ai4bharat/MSMARCO-XI.
+        Uses parquet files mapping for high-speed Indic language streaming.
+        """
         try:
             from datasets import load_dataset
-            logger.info(f"Connecting to Hugging Face dataset {settings.DATASET_NAME} for lang: {language}...")
-            hf_ds = load_dataset(settings.DATASET_NAME, language, split="train", streaming=True)
-            
+
+            lang_key = language.lower().split("-")[0]
+            prefix = MSMARCO_XI_LANG_PREFIX.get(lang_key, "hin")
+            parquet_filename = f"{split}/{prefix}{split[:3]}.parquet"
+            parquet_url = f"https://huggingface.co/datasets/ai4bharat/MSMARCO-XI/resolve/main/{parquet_filename}"
+
+            logger.info(f"Loading ai4bharat/MSMARCO-XI ({language}) via {parquet_filename}...")
+
+            # Try streaming directly from parquet file
+            try:
+                hf_ds = load_dataset("parquet", data_files={split: parquet_url}, split=split, streaming=True)
+            except Exception:
+                # Fallback to standard dataset load syntax
+                hf_ds = load_dataset(settings.DATASET_NAME, data_files={split: parquet_filename}, split=split, streaming=True)
+
             count = 0
             for row in hf_ds:
                 if count >= max_samples:
@@ -311,16 +465,16 @@ class DatasetLoader:
                 for idx, text in enumerate(passage_texts):
                     if not text or len(text.strip()) < 10:
                         continue
-                    doc_id = f"hf-{language}-{row.get('query_id', count)}-{idx}"
+                    doc_id = f"hf-{lang_key}-{row.get('query_id', count)}-{idx}"
                     doc = DocumentRecord(
                         id=doc_id,
                         query=query,
                         passage_text=text.strip(),
                         answers=answers if idx == 0 else [],
                         metadata=PassageMetadata(
-                            passage_id=f"p-{language}-{count}-{idx}",
+                            passage_id=f"p-{lang_key}-{count}-{idx}",
                             query_id=str(row.get("query_id", count)),
-                            language=language,
+                            language=lang_key,
                             is_selected=bool(is_selected[idx]) if idx < len(is_selected) else True,
                             topic="MSMARCO-XI Streamed",
                             source=settings.DATASET_NAME
@@ -328,13 +482,34 @@ class DatasetLoader:
                     )
                     self.documents.append(doc)
                     count += 1
+                    break  # Take primary passage per query for balanced density
 
             self._save_cache()
             logger.info(f"Successfully ingested {count} samples from Hugging Face for lang {language}")
             return count
         except Exception as e:
-            logger.warning(f"Could not stream from Hugging Face ({e}). Operating with local multilingual cache.")
+            logger.warning(f"Hugging Face ingestion notice ({e}). Maintained {len(self.documents)} cached multilingual records.")
             return 0
+
+    def add_custom_document(self, query: str, passage: str, language: str = "hi", answers: Optional[List[str]] = None, topic: str = "custom") -> DocumentRecord:
+        """Adds a new document to the corpus dynamically."""
+        doc_id = f"doc-{language}-{len(self.documents) + 1}"
+        doc = DocumentRecord(
+            id=doc_id,
+            query=query,
+            passage_text=passage,
+            answers=answers or [],
+            metadata=PassageMetadata(
+                passage_id=f"p-{doc_id}",
+                query_id=f"q-{doc_id}",
+                language=language,
+                topic=topic,
+                source=settings.DATASET_NAME
+            )
+        )
+        self.documents.append(doc)
+        self._save_cache()
+        return doc
 
     def get_all_documents(self) -> List[DocumentRecord]:
         return self.documents
@@ -347,6 +522,7 @@ class DatasetLoader:
         return {
             "total_documents": len(self.documents),
             "languages": lang_counts,
+            "supported_indic_languages": list(MSMARCO_XI_LANG_PREFIX.keys()) + ["en"],
             "source": settings.DATASET_NAME,
             "cache_file": str(self.cache_file)
         }

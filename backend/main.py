@@ -86,6 +86,18 @@ class BenchmarkRequest(BaseModel):
     strategy: Optional[str] = "indic_semantic"
     provider: Optional[str] = "fast_synthesizer"
 
+class IngestHFRequest(BaseModel):
+    language: str = "hi"
+    max_samples: int = 20
+    split: str = "train"
+
+class AddDocumentRequest(BaseModel):
+    query: str
+    passage: str
+    language: str = "hi"
+    topic: Optional[str] = "custom"
+    answers: Optional[List[str]] = Field(default_factory=list)
+
 # =============================================================================
 # Pipeline Core Execution Function
 # =============================================================================
@@ -351,6 +363,45 @@ def get_dataset_stats():
     stats["indexed_chunks"] = len(vector_store.chunks)
     stats["active_strategy"] = current_active_strategy
     return stats
+
+@app.post("/api/dataset/ingest-hf")
+def ingest_from_huggingface(req: IngestHFRequest):
+    """
+    Ingests live samples from Hugging Face ai4bharat/MSMARCO-XI dataset
+    for the specified Indic language, updates local cache, and reindexes vector store.
+    """
+    count = dataset_loader.load_from_huggingface(
+        language=req.language,
+        max_samples=req.max_samples,
+        split=req.split
+    )
+    # Reindex vector store with newly ingested documents
+    initialize_index(current_active_strategy)
+    stats = dataset_loader.get_stats()
+    stats["ingested_new_samples"] = count
+    stats["indexed_chunks"] = len(vector_store.chunks)
+    return stats
+
+@app.get("/api/dataset/documents")
+def get_dataset_documents(language: Optional[str] = None, limit: int = 50):
+    """Returns list of documents in MSMARCO-XI corpus with optional language filter."""
+    docs = dataset_loader.get_all_documents()
+    if language:
+        docs = [d for d in docs if d.metadata.language == language]
+    return [d.model_dump() for d in docs[:limit]]
+
+@app.post("/api/dataset/add-document")
+def add_custom_dataset_document(req: AddDocumentRequest):
+    """Adds a custom question-passage document to the MSMARCO-XI corpus and updates index."""
+    doc = dataset_loader.add_custom_document(
+        query=req.query,
+        passage=req.passage,
+        language=req.language,
+        answers=req.answers,
+        topic=req.topic or "custom"
+    )
+    initialize_index(current_active_strategy)
+    return {"status": "success", "document": doc.model_dump(), "indexed_chunks": len(vector_store.chunks)}
 
 # Serve Frontend static assets
 if FRONTEND_DIR.exists():

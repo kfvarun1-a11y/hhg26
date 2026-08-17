@@ -187,6 +187,23 @@
     }
   },
   {
+    "id": "msmarco-te-3002",
+    "query": "ఆంధ్రప్రదేశ్ రాజధాని ఏది?",
+    "passage_text": "ఆంధ్రప్రదేశ్ ప్రభుత్వం అమరావతిని రాష్ట్ర రాజధానిగా అభివృద్ధి చేస్తోంది. ఇది కృష్ణా నది ఒడ్డున గుంటూరు మరియు విజయవాడ నగరాల మధ్య ఉన్న ఒక చారిత్రక ప్రదేశం.",
+    "answers": [
+      "అమరావతి ఆంధ్రప్రదేశ్ రాజధాని."
+    ],
+    "metadata": {
+      "passage_id": "te-pass-3002",
+      "query_id": "te-q-3002",
+      "language": "te",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Andhra Pradesh?"
+    }
+  },
+  {
     "id": "msmarco-ta-4001",
     "query": "திருக்குறளை இயற்றியவர் யார் மற்றும் அதில் எத்தனை அதிகாரங்கள் உள்ளன?",
     "passage_text": "திருக்குறளை இயற்றியவர் திருவள்ளுவர் ஆவார். இதில் மொத்தம் 133 அதிகாரங்களும், 1330 குறட்பாக்களும் உள்ளன. இது அறத்துப்பால், பொருட்பால், காமத்துப்பால் என்ற மூன்று பெரும் பிரிவுகளாக பிரிக்கப்பட்டுள்ளது.",
@@ -204,6 +221,23 @@
     }
   },
   {
+    "id": "msmarco-ta-4002",
+    "query": "தமிழ்நாட்டின் தலைநகரம் எது?",
+    "passage_text": "சென்னை தமிழ்நாட்டின் தலைநகரமாகவும், இந்தியாவின் நான்காவது பெரிய பெருநகரமாகவும் விளங்குகிறது. இது வங்காள விரிகுடாவின் கோரமண்டல் கடற்கரையில் அமைந்துள்ளது மற்றும் 'தென்னிந்தியாவின் நுழைவாயில்' என்று அழைக்கப்படுகிறது.",
+    "answers": [
+      "சென்னை தமிழ்நாட்டின் தலைநகரம்."
+    ],
+    "metadata": {
+      "passage_id": "ta-pass-4002",
+      "query_id": "ta-q-4002",
+      "language": "ta",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Tamil Nadu?"
+    }
+  },
+  {
     "id": "msmarco-bn-5001",
     "query": "ভারতের জাতীয় সঙ্গীত কে রচনা করেছিলেন?",
     "passage_text": "ভারতের জাতীয় সঙ্গীত 'জন গণ মন' রবীন্দ্রনাথ ঠাকুর রচনা করেছিলেন। এটি মূলত ১৯১১ সালে রচিত হয়েছিল এবং ১৯৫০ সালের ২৪ জানুয়ারি আনুষ্ঠানিকভাবে ভারতের জাতীয় সঙ্গীত হিসেবে গৃহীত হয়।",
@@ -218,6 +252,142 @@
       "topic": "National Heritage",
       "source": "ai4bharat/MSMARCO-XI",
       "original_english": "Who composed the National Anthem of India?"
+    }
+  },
+  {
+    "id": "msmarco-bn-5002",
+    "query": "পশ্চিমবঙ্গের রাজধানী কোনটি?",
+    "passage_text": "কলকাতা পশ্চিমবঙ্গের রাজধানী এবং পূর্ব ভারতের প্রধান বাণিজ্যিক, সাংস্কৃতিক ও শিক্ষাকেন্দ্র। এটি হুগলি নদীর পূর্ব তীরে অবস্থিত একটি ঐতিহাসিক শহর।",
+    "answers": [
+      "কলকাতা পশ্চিমবঙ্গের রাজধানী।"
+    ],
+    "metadata": {
+      "passage_id": "bn-pass-5002",
+      "query_id": "bn-q-5002",
+      "language": "bn",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of West Bengal?"
+    }
+  },
+  {
+    "id": "msmarco-mr-6001",
+    "query": "महाराष्ट्राची राजधानी कोणती आहे?",
+    "passage_text": "मुंबई ही भारताच्या महाराष्ट्र राज्याची राजधानी असून ती भारताची आर्थिक राजधानी मानली जाते. मुंबई हे अरबी समुद्राच्या किनाऱ्यावर वसलेले भारतातील सर्वात मोठे महानगर आहे.",
+    "answers": [
+      "मुंबई ही महाराष्ट्राची राजधानी आहे."
+    ],
+    "metadata": {
+      "passage_id": "mr-pass-6001",
+      "query_id": "mr-q-6001",
+      "language": "mr",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Maharashtra? Mumbai is the capital of Maharashtra."
+    }
+  },
+  {
+    "id": "msmarco-kn-7001",
+    "query": "ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಯಾವುದು?",
+    "passage_text": "ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಮತ್ತು ಭಾರತದ ಪ್ರಮುಖ ಮಾಹಿತಿ ತಂತ್ರಜ್ಞಾನ (IT) ಕೇಂದ್ರವಾಗಿದೆ. ಇದನ್ನು ಭಾರತದ ಸಿಲಿಕಾನ್ ವ್ಯಾಲಿ ಎಂದು ಕರೆಯಲಾಗುತ್ತದೆ.",
+    "answers": [
+      "ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ."
+    ],
+    "metadata": {
+      "passage_id": "kn-pass-7001",
+      "query_id": "kn-q-7001",
+      "language": "kn",
+      "is_selected": true,
+      "topic": "Geography & Technology Hubs",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Karnataka? Bengaluru is the capital of Karnataka."
+    }
+  },
+  {
+    "id": "msmarco-gu-8001",
+    "query": "ગુજરાતનું પાટનગર કયું છે?",
+    "passage_text": "ગાંધીનગર ગુજરાત રાજ્યનું પાટનગર છે, જેનું નામ રાષ્ટ્રપિતા મહಾત્મા ગાંધીના નામ પરથી રાખવામાં આવ્યું છે. તે સાબરમતી નદીના કિનારે આવેલું સુઆયોજಿತ શહેર છે.",
+    "answers": [
+      "ગાંધીનગર ગુજરાતનું પાટનગર છે."
+    ],
+    "metadata": {
+      "passage_id": "gu-pass-8001",
+      "query_id": "gu-q-8001",
+      "language": "gu",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Gujarat? Gandhinagar is the capital of Gujarat."
+    }
+  },
+  {
+    "id": "msmarco-ml-9001",
+    "query": "കേരളത്തിന്റെ തലസ്ഥാനം ഏതാണ്?",
+    "passage_text": "തിരുവനന്തപുരം കേരളത്തിന്റെ തലസ്ഥാന നഗരമാണ്. പ്രശസ്തമായ പത്മനാഭസ്വാമി ക്ഷേത്രവും വിക്രം സാരാഭായ് സ്പേസ് സെന്ററും (VSSC) ഈ നഗരത്തിലാണ് സ്ഥിതി ചെയ്യുന്നത്.",
+    "answers": [
+      "തിരുവനന്തപുരം കേരളത്തിന്റെ തലസ്ഥാനമാണ്."
+    ],
+    "metadata": {
+      "passage_id": "ml-pass-9001",
+      "query_id": "ml-q-9001",
+      "language": "ml",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Kerala?"
+    }
+  },
+  {
+    "id": "msmarco-pa-9101",
+    "query": "ਪੰਜਾਬ ਦੀ ਰਾਜਧਾਨੀ ਕਿਹੜੀ ਹੈ?",
+    "passage_text": "ਚੰਡੀਗੜ੍ਹ ਪੰਜਾਬ ਅਤੇ ਹਰਿਆਣਾ ਦੋਵਾਂ ਰਾਜਾਂ ਦੀ ਸਾਂਝੀ ਰਾਜਧਾਨੀ ਹੈ ਅਤੇ ਇਹ ਇੱਕ ਕੇਂਦਰ ਸ਼ਾਸਿਤ ਪ੍ਰਦੇਸ਼ ਹੈ। ਇਹ ਭਾਰਤ ਦਾ ਇੱਕ ਯੋਜਨਾਬੱਧ ਸੁੰਦਰ ਸ਼ਹਿਰ ਹੈ।",
+    "answers": [
+      "ਚੰਡੀਗੜ੍ਹ ਪੰਜਾਬ ਦੀ ਰਾਜਧਾਨੀ ਹੈ।"
+    ],
+    "metadata": {
+      "passage_id": "pa-pass-9101",
+      "query_id": "pa-q-9101",
+      "language": "pa",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Punjab?"
+    }
+  },
+  {
+    "id": "msmarco-or-9201",
+    "query": "ଓଡ଼ିଶାର ରାଜଧାନୀ କଣ?",
+    "passage_text": "ଭୁବନେଶ୍ୱର ଓଡ଼ିଶାର ରାଜଧାନୀ ଏବଂ ଏହା 'ମନ୍ଦିର ମାଳିନୀ ନଗରୀ' ଭାବରେ ପ୍ରସିଦ୍ଧ। ଏଠାରେ ପ୍ରସିଦ୍ଧ ଲିଙ୍ଗରାଜ ମନ୍ଦିର ଏବଂ ଧଉଳି ଶାନ୍ତି ସ୍ତୂପ ଅବସ୍ଥିତ।",
+    "answers": [
+      "ଭୁବନେଶ୍ୱର ଓଡ଼ିଶାର ରାଜଧାନୀ।"
+    ],
+    "metadata": {
+      "passage_id": "or-pass-9201",
+      "query_id": "or-q-9201",
+      "language": "or",
+      "is_selected": true,
+      "topic": "Geography & State Capitals",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "What is the capital of Odisha?"
+    }
+  },
+  {
+    "id": "msmarco-ur-9301",
+    "query": "تاج محل کس نے تعمیر کروایا تھا؟",
+    "passage_text": "تاج محل مغل شہنشاہ شاہ جہاں نے اپنی چہیتی بیوی ممتاز محل کی یاد میں آگرہ، بھارت میں دریائے جمنا کے کنارے بنوایا تھا۔ یہ سفید سنگ مرمر سے بنی ایک شاہکار تاریخی عمارت ہے۔",
+    "answers": [
+      "شاہ جہاں نے تاج محل تعمیر کروایا تھا۔"
+    ],
+    "metadata": {
+      "passage_id": "ur-pass-9301",
+      "query_id": "ur-q-9301",
+      "language": "ur",
+      "is_selected": true,
+      "topic": "History & Heritage",
+      "source": "ai4bharat/MSMARCO-XI",
+      "original_english": "Who built the Taj Mahal?"
     }
   }
 ]

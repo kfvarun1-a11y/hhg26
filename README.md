@@ -94,17 +94,30 @@ ELEVENLABS_API_KEY=your_elevenlabs_api_key
 GROQ_API_KEY=your_groq_api_key
 ```
 
-### 3. Run Pipeline Unit Tests
+### 3. Ingest or Explore `ai4bharat/MSMARCO-XI` Dataset
+Inspect dataset stats or ingest additional samples from Hugging Face across Indic languages:
+```bash
+# View corpus stats across Indic languages
+python ingest_dataset.py --stats
+
+# Show sample queries & passages from MSMARCO-XI
+python ingest_dataset.py --show-samples --lang hi
+
+# Ingest fresh samples from Hugging Face for Hindi, Telugu, Tamil, Bengali, etc.
+python ingest_dataset.py --lang hi --samples 20
+```
+
+### 4. Run Pipeline Unit Tests
 ```bash
 python tests/test_pipeline.py
 ```
 
-### 4. Run Automated Latency Benchmark (P50/P70/P100)
+### 5. Run Automated Latency Benchmark (P50/P70/P100)
 ```bash
 python run_benchmark.py
 ```
 
-### 5. Start the Web Application
+### 6. Start the Web Application
 ```bash
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
