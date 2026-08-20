@@ -134,7 +134,8 @@ class ModelHarness:
     ) -> Tuple[str, List[str], float]:
         """
         Deterministic, ultra-fast (<2ms) factual synthesis strictly extracted from
-        top retrieved passages. Guarantees zero hallucinations and sub-200ms latency.
+        top retrieved passages. Guarantees zero hallucinations and returns the complete,
+        untruncated answer from the dataset.
         """
         if not retrieval_results:
             return (
@@ -146,16 +147,18 @@ class ModelHarness:
         top_res = retrieval_results[0]
         context = top_res.context_text.strip()
         
-        # Extract direct answer sentences
-        sentences = [s.strip() for s in re.split(r'(?<=[।॥\.\?!])\s+', context) if len(s.strip()) > 8]
+        # Clean any metadata prefixes like [Lang: HI | Topic: Science] if present
+        context_clean = re.sub(r'^\[Lang:[^\]]+\]\s*', '', context).strip()
+
+        # Extract all constituent factual sentences
+        sentences = [s.strip() for s in re.split(r'(?<=[।॥\.\?!])\s+', context_clean) if len(s.strip()) > 5]
         if not sentences:
-            sentences = [context]
+            sentences = [context_clean]
 
-        primary_answer = sentences[0]
-        if len(sentences) > 1 and len(primary_answer) < 120:
-            primary_answer += " " + sentences[1]
+        # Return full, complete answer from the dataset passage without clipping
+        primary_answer = context_clean
 
-        facts = [s for s in sentences[:3]]
+        facts = [s for s in sentences]
         confidence = min(0.99, max(0.60, top_res.score * 1.2))
         return primary_answer, facts, round(confidence, 2)
 
@@ -167,6 +170,7 @@ class ModelHarness:
 
         prompt = f"""You are a strict, grounded multilingual question-answering assistant for the ai4bharat/MSMARCO-XI dataset.
 Answer the user query based ONLY on the provided context passages below.
+Provide a complete, comprehensive, and fully detailed answer from the context passages without omitting or cutting off any facts.
 If the context passages do not contain sufficient information to answer the question, or if the question is not related to the context in the dataset, you MUST respond EXACTLY with:
 "I couldn’t find sufficient information in the provided dataset to answer this question."
 Do not hallucinate or make up any information outside the provided passages.
@@ -176,7 +180,7 @@ Context Passages:
 
 User Query: {query}
 
-Provide the answer based strictly on the context passages above:"""
+Provide the complete answer based strictly on the context passages above:"""
 
         url = "https://api.groq.com/openai/v1/chat/completions"
         headers = {
@@ -187,7 +191,7 @@ Provide the answer based strictly on the context passages above:"""
             "model": "llama-3.1-8b-instant",
             "messages": [{"role": "user", "content": prompt}],
             "temperature": 0.1,
-            "max_tokens": 200
+            "max_tokens": 1024
         }
 
         async with httpx.AsyncClient(timeout=4.0) as client:

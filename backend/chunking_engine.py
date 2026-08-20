@@ -115,6 +115,7 @@ class ChunkingEngine:
                     text=chunk_text,
                     token_count=estimate_tokens(chunk_text),
                     strategy="indic_semantic",
+                    parent_text=doc.passage_text.strip(),
                     metadata={
                         **doc.metadata.model_dump(),
                         "sentence_count": len(current_chunk_sentences),
@@ -220,6 +221,7 @@ class ChunkingEngine:
                     text=rich_text,
                     token_count=estimate_tokens(rich_text),
                     strategy="metadata_sliding_window",
+                    parent_text=doc.passage_text.strip(),
                     metadata={
                         **doc.metadata.model_dump(),
                         "window_start": i,
@@ -293,6 +295,7 @@ class ChunkingEngine:
                     text=text,
                     token_count=estimate_tokens(text),
                     strategy="recursive_boundary",
+                    parent_text=doc.passage_text.strip(),
                     metadata={
                         **doc.metadata.model_dump(),
                         "recursive_depth": len(separators),

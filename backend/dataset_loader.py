@@ -57,66 +57,66 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     {
         "id": "msmarco-hi-1001",
         "query": "भारत की राजधानी क्या है?",
-        "passage_text": "नई दिल्ली भारत की आधिकारिक राजधानी है और भारत सरकार की तीनों शाखाओं (कार्यपालिका, विधायिका और न्यायपालिका) की सीट है। 1911 में जॉर्ज पंचम के दिल्ली दरबार के दौरान राजधानी को कलकत्ता से दिल्ली स्थानांतरित करने की घोषणा की गई थी।",
-        "answers": ["नई दिल्ली भारत की आधिकारिक राजधानी है।"],
+        "passage_text": "नई दिल्ली भारत की राजधानी और केंद्र शासित प्रदेश है। यह भारत सरकार की तीनों शाखाओं (कार्यपालिका, विधायिका और न्यायपालिका) की मुख्य सीट है। राष्ट्रपति भवन, संसद भवन और सर्वोच्च न्यायालय यहीं स्थित हैं।",
+        "answers": ["नई दिल्ली भारत की राजधानी है।"],
         "metadata": {
             "passage_id": "hi-pass-1001",
             "query_id": "hi-q-1001",
             "language": "hi",
-            "topic": "Geography & Governance",
-            "original_english": "What is the capital of India? New Delhi is the official capital of India."
+            "topic": "Geography & Government",
+            "original_english": "What is the capital of India? New Delhi is the capital of India."
         }
     },
     {
         "id": "msmarco-hi-1002",
-        "query": "प्रकाश संश्लेषण क्या है और यह कैसे काम करता है?",
-        "passage_text": "प्रकाश संश्लेषण (Photosynthesis) वह जैविक प्रक्रिया है जिसके द्वारा हरे पौधे, शैवाल और कुछ जीवाणु सूर्य के प्रकाश, कार्बन डाइऑक्साइड (CO2) और पानी (H2O) का उपयोग करके ग्लूकोज (ऊर्जा) और ऑक्सीजन (O2) का उत्पादन करते हैं। क्लोरोफिल इस प्रक्रिया में सूर्य के प्रकाश को अवशोषित करने वाला मुख्य वर्णक है।",
-        "answers": ["प्रकाश संश्लेषण पौधों द्वारा सूर्य के प्रकाश, पानी और CO2 से ऊर्जा और ऑक्सीजन बनाने की प्रक्रिया है।"],
+        "query": "सूर्य के प्रकाश को पृथ्वी तक पहुँचने में कितना समय लगता है?",
+        "passage_text": "सूर्य का प्रकाश पृथ्वी तक पहुँचने में लगभग 8 मिनट और 20 सेकंड (लगभग 500 सेकंड) का समय लेता है। प्रकाश की गति निर्वात में 299,792 किलोमीटर प्रति सेकंड होती है और सूर्य तथा पृथ्वी के बीच की औसत दूरी लगभग 149.6 मिलियन किलोमीटर है।",
+        "answers": ["सूर्य के प्रकाश को पृथ्वी तक पहुँचने में लगभग 8 मिनट 20 सेकंड लगते हैं।"],
         "metadata": {
             "passage_id": "hi-pass-1002",
             "query_id": "hi-q-1002",
             "language": "hi",
-            "topic": "Science & Biology",
-            "original_english": "What is photosynthesis and how does it work?"
+            "topic": "Science & Astronomy",
+            "original_english": "How long does sunlight take to reach Earth?"
         }
     },
     {
         "id": "msmarco-hi-1003",
-        "query": "कृत्रिम बुद्धिमत्ता (AI) और मशीन लर्निंग में क्या अंतर है?",
-        "passage_text": "आर्टिफिशियल इंटेलिजेंस (AI) कंप्यूटर विज्ञान का एक व्यापक क्षेत्र है जो ऐसी प्रणालियाँ बनाने पर केंद्रित है जो मानव जैसी बुद्धिमत्ता का प्रदर्शन करती हैं। मशीन लर्निंग (ML) AI का एक उपक्षेत्र है जिसमें एल्गोरिदम डेटा से सीखते हैं और स्पष्ट रूप से प्रोग्राम किए बिना समय के साथ अपने प्रदर्शन में सुधार करते हैं।",
-        "answers": ["AI एक व्यापक क्षेत्र है, जबकि मशीन लर्निंग डेटा से सीखने वाली AI की एक उप-शाखा है।"],
+        "query": "कंप्यूटर में RAM क्या काम करता है?",
+        "passage_text": "RAM का पूरा नाम रैंडम एक्सेस मेमोरी (Random Access Memory) है। यह एक वोलेटाइल (अस्थिर) मेमोरी है जो कंप्यूटर द्वारा वर्तमान में चल रहे प्रोग्राम्स और डेटा को तेज़ी से पढ़ने और लिखने के लिए इस्तेमाल की जाती है। कंप्यूटर बंद होने पर RAM का डेटा मिट जाता है।",
+        "answers": ["RAM कंप्यूटर की प्राथमिक अस्थिर मेमोरी है जो वर्तमान डेटा और प्रोग्राम को तेज़ी से प्रोसेस करती है।"],
         "metadata": {
             "passage_id": "hi-pass-1003",
             "query_id": "hi-q-1003",
             "language": "hi",
-            "topic": "Technology & AI",
-            "original_english": "What is the difference between Artificial Intelligence and Machine Learning?"
+            "topic": "Technology & Hardware",
+            "original_english": "What does RAM do in a computer?"
         }
     },
     {
         "id": "msmarco-hi-1004",
-        "query": "भारतीय अंतरिक्ष अनुसंधान संगठन (ISRO) की स्थापना कब हुई थी?",
-        "passage_text": "भारतीय अंतरिक्ष अनुसंधान संगठन (इसरो - ISRO) की स्थापना 15 अगस्त 1969 को हुई थी। इसके संस्थापक डॉ. विक्रम साराभाई थे, जिन्हें भारतीय अंतरिक्ष कार्यक्रम का जनक माना जाता है। इसरो का मुख्यालय बेंगलुरु, कर्नाटक में स्थित है।",
-        "answers": ["ISRO की स्थापना 15 अगस्त 1969 को डॉ. विक्रम साराभाई द्वारा की गई थी।"],
+        "query": "योग के क्या फायदे हैं?",
+        "passage_text": "योग एक प्राचीन भारतीय अनुशासन है जो शारीरिक शक्ति, मानसिक शांति, लचीलापन और एकाग्रता को बेहतर बनाता है। नियमित योगाभ्यास तनाव को कम करता है, रक्तचाप को नियंत्रित रखता है और समग्र प्रतिरक्षा प्रणाली को मजबूत करता है।",
+        "answers": ["योग शारीरिक लचीलापन, मानसिक शांति और तनाव मुक्ति प्रदान करता है।"],
         "metadata": {
             "passage_id": "hi-pass-1004",
             "query_id": "hi-q-1004",
             "language": "hi",
-            "topic": "Space & History",
-            "original_english": "When was the Indian Space Research Organisation (ISRO) founded?"
+            "topic": "Health & Wellness",
+            "original_english": "What are the benefits of yoga?"
         }
     },
     {
         "id": "msmarco-hi-1005",
-        "query": "स्वस्थ हृदय के लिए कौन से व्यायाम सबसे अच्छे हैं?",
-        "passage_text": "हृदय स्वास्थ्य को बेहतर बनाने के लिए एरोबिक व्यायाम जैसे तेज चलना, दौड़ना, तैराकी और साइकिल चलाना सबसे प्रभावी हैं। सप्ताह में कम से कम 150 मिनट का मध्यम व्यायाम हृदय गति को नियंत्रित रखने, रक्तचाप कम करने और खराब कोलेस्ट्रॉल को घटाने में सहायक होता है।",
-        "answers": ["तेज चलना, दौड़ना, साइकिल चलाना और तैराकी हृदय स्वास्थ्य के लिए सर्वश्रेष्ठ हैं।"],
+        "query": "भारतीय संविधान कब लागू हुआ था?",
+        "passage_text": "भारत का संविधान 26 जनवरी 1950 को पूरे देश में लागू हुआ था। इसी ऐतिहासिक दिन को भारत में हर साल गणतंत्र दिवस के रूप में धूमधाम से मनाया जाता है। डॉ. भीमराव अंबेडकर को संविधान का मुख्य शिल्पकार माना जाता है।",
+        "answers": ["भारतीय संविधान 26 जनवरी 1950 को लागू हुआ था।"],
         "metadata": {
             "passage_id": "hi-pass-1005",
             "query_id": "hi-q-1005",
             "language": "hi",
-            "topic": "Health & Fitness",
-            "original_english": "What exercises are best for a healthy heart?"
+            "topic": "Indian History & Constitution",
+            "original_english": "When did the Constitution of India come into effect?"
         }
     },
     # -------------------------------------------------------------------------
@@ -124,67 +124,67 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     # -------------------------------------------------------------------------
     {
         "id": "msmarco-en-2001",
-        "query": "How does Retrieval-Augmented Generation (RAG) improve LLM responses?",
-        "passage_text": "Retrieval-Augmented Generation (RAG) is an architectural pattern that enhances Large Language Models by dynamically retrieving relevant facts from an external vector knowledge base before generating a response. This significantly reduces hallucinations, ensures factual grounding, and allows the model to access proprietary, fresh, or domain-specific context without expensive fine-tuning.",
-        "answers": ["RAG reduces hallucinations by retrieving grounded factual context from external vector databases."],
+        "query": "What is the capital of India?",
+        "passage_text": "New Delhi is the official capital of India and the seat of all three branches of the Government of India. It serves as the center of the National Capital Territory of Delhi, housing iconic landmarks such as Rashtrapati Bhavan and the Parliament House.",
+        "answers": ["New Delhi is the capital of India."],
         "metadata": {
             "passage_id": "en-pass-2001",
             "query_id": "en-q-2001",
             "language": "en",
-            "topic": "AI & RAG Architecture",
-            "original_english": "How does Retrieval-Augmented Generation work?"
+            "topic": "Geography & Government",
+            "original_english": "What is the capital of India?"
         }
     },
     {
         "id": "msmarco-en-2002",
-        "query": "What causes the aurora borealis or northern lights?",
-        "passage_text": "The aurora borealis, or northern lights, is caused by collisions between electrically charged particles released from the sun that enter the earth's atmosphere and collide with gases such as oxygen and nitrogen. The Earth's magnetic field directs these solar particles toward the polar regions, producing vibrant displays of green, pink, violet, and red light.",
-        "answers": ["Solar charged particles colliding with atmospheric gases in Earth's polar magnetic field."],
+        "query": "How fast does light travel in a vacuum?",
+        "passage_text": "Light travels at a universal constant speed of approximately 299,792,458 meters per second (about 300,000 km/s or 186,282 miles per second) in a vacuum. It takes about 8 minutes and 20 seconds for light from the Sun to reach planet Earth.",
+        "answers": ["Light travels at approximately 299,792,458 meters per second in a vacuum."],
         "metadata": {
             "passage_id": "en-pass-2002",
             "query_id": "en-q-2002",
             "language": "en",
-            "topic": "Astronomy & Physics",
-            "original_english": "What causes the northern lights?"
+            "topic": "Physics & Astronomy",
+            "original_english": "How fast does light travel in a vacuum?"
         }
     },
     {
         "id": "msmarco-en-2003",
-        "query": "What is vector database indexing and why is HNSW used?",
-        "passage_text": "Vector database indexing organizes high-dimensional embeddings to enable approximate nearest neighbor (ANN) search with sub-millisecond latency. Hierarchical Navigable Small World (HNSW) graphs are the state-of-the-art vector index format because they provide logarithmic search time complexity O(log N) with extremely high recall rates across dense embeddings.",
-        "answers": ["HNSW is a graph-based vector index that provides logarithmic search complexity and high recall."],
+        "query": "What is the primary function of RAM in computing?",
+        "passage_text": "Random Access Memory (RAM) is high-speed temporary volatile computer memory that stores data and machine code currently being actively used or processed by the CPU, allowing instantaneous read and write operations without accessing slow persistent storage.",
+        "answers": ["RAM provides high-speed volatile working memory for currently running applications."],
         "metadata": {
             "passage_id": "en-pass-2003",
             "query_id": "en-q-2003",
             "language": "en",
-            "topic": "Vector Databases & Search",
-            "original_english": "What is HNSW vector indexing?"
+            "topic": "Computer Science",
+            "original_english": "What is the primary function of RAM in computing?"
         }
     },
     {
         "id": "msmarco-en-2004",
-        "query": "What are the benefits of speech-to-text in multilingual systems?",
-        "passage_text": "Multilingual speech-to-text systems enable natural voice interaction across diverse languages and accents. Providers like Sarvam AI specialize in Indian linguistic nuances and code-switching, while ElevenLabs Scribe offers rapid audio transcription. STT allows users to interact without typing barriers, expanding accessibility to millions of non-English native speakers.",
-        "answers": ["Speech-to-text breaks typing barriers and enables natural voice interaction across regional dialects."],
+        "query": "What are the health benefits of regular exercise?",
+        "passage_text": "Regular physical exercise improves cardiovascular health, enhances muscular strength, regulates body weight, reduces insulin resistance, and boosts cognitive function by releasing endorphins and neurotrophic factors.",
+        "answers": ["Exercise strengthens the heart, improves cognitive clarity, and supports metabolic health."],
         "metadata": {
             "passage_id": "en-pass-2004",
             "query_id": "en-q-2004",
             "language": "en",
-            "topic": "Speech & Voice AI",
-            "original_english": "What are the benefits of multilingual STT?"
+            "topic": "Health & Physiology",
+            "original_english": "What are the health benefits of regular exercise?"
         }
     },
     {
         "id": "msmarco-en-2005",
-        "query": "What are guardrails in Large Language Models and why are they necessary?",
-        "passage_text": "Guardrails are programmable safety, relevance, and factuality filters placed around LLM pipelines. They inspect user inputs to intercept jailbreaks, prompt injections, and off-topic questions, and verify model outputs to detect hallucinations, toxicity, or ungrounded assertions. Guardrails ensure enterprise compliance, safety, and model trustworthiness.",
-        "answers": ["Guardrails prevent prompt injections, block off-topic queries, and verify output grounding."],
+        "query": "What is machine learning in artificial intelligence?",
+        "passage_text": "Machine Learning is a subset of Artificial Intelligence where statistical algorithms and neural architectures learn patterns directly from empirical training data, improving task performance over time without explicit hard-coded rules.",
+        "answers": ["Machine learning enables computational systems to learn patterns and predict outcomes from data."],
         "metadata": {
             "passage_id": "en-pass-2005",
             "query_id": "en-q-2005",
             "language": "en",
-            "topic": "AI Safety & Guardrails",
-            "original_english": "Why are guardrails necessary in AI?"
+            "topic": "Artificial Intelligence",
+            "original_english": "What is machine learning in artificial intelligence?"
         }
     },
     # -------------------------------------------------------------------------
@@ -192,28 +192,28 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     # -------------------------------------------------------------------------
     {
         "id": "msmarco-te-3001",
-        "query": "భారత రాజ్యాంగ పితామహుడు ఎవరు?",
-        "passage_text": "డాక్టర్ బి.ఆర్. అంబేద్కర్ గారిని భారత రాజ్యాంగ పితామహుడిగా గౌరవిస్తారు. ఆయన భారత రాజ్యాంగ ముసాయిదా కమిటీకి చైర్మన్‌గా వ్యవహరించారు మరియు దేశానికి సమగ్ర రాజ్యాంగాన్ని రూపొందించడంలో కీలక పాత్ర పోషించారు.",
-        "answers": ["డాక్టర్ బి.ఆర్. అంబేద్కర్ భారత రాజ్యాంగ పితామహుడు."],
+        "query": "ఆంధ్రప్రదేశ్ రాజధాని ఏది?",
+        "passage_text": "అమరావతి ఆంధ్రప్రదేశ్ రాష్ట్ర అధికారిక రాజధాని నగరం. ఇది కృష్ణా నది ఒడ్డున గుంటూరు జిల్లాలో ఉన్న చారిత్రక మరియు పరిపాలనా కేంద్రం.",
+        "answers": ["అమరావతి ఆంధ్రప్రదేశ్ రాజధాని."],
         "metadata": {
             "passage_id": "te-pass-3001",
             "query_id": "te-q-3001",
             "language": "te",
-            "topic": "Constitution & History",
-            "original_english": "Who is known as the Father of the Indian Constitution?"
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Andhra Pradesh? Amaravati is the capital of Andhra Pradesh."
         }
     },
     {
         "id": "msmarco-te-3002",
-        "query": "ఆంధ్రప్రదేశ్ రాజధాని ఏది?",
-        "passage_text": "ఆంధ్రప్రదేశ్ ప్రభుత్వం అమరావతిని రాష్ట్ర రాజధానిగా అభివృద్ధి చేస్తోంది. ఇది కృష్ణా నది ఒడ్డున గుంటూరు మరియు విజయవాడ నగరాల మధ్య ఉన్న ఒక చారిత్రక ప్రదేశం.",
-        "answers": ["అమరావతి ఆంధ్రప్రదేశ్ రాజధాని."],
+        "query": "తెలంగాణ రాజధాని ఏది?",
+        "passage_text": "హైదరాబాద్ తెలంగాణ రాష్ట్ర రాజధాని మరియు భారతదేశంలోని ప్రముఖ సమాచార సాంకేతిక (IT) మరియు ఔషధ తయారీ కేంద్రం. చార్మినార్ మరియు గోల్కొండ కోట ఇక్కడి ప్రసిద్ధ చారిత్రక కట్టడాలు.",
+        "answers": ["హైదరాబాద్ తెలంగాణ రాజధాని."],
         "metadata": {
             "passage_id": "te-pass-3002",
             "query_id": "te-q-3002",
             "language": "te",
             "topic": "Geography & State Capitals",
-            "original_english": "What is the capital of Andhra Pradesh?"
+            "original_english": "What is the capital of Telangana? Hyderabad is the capital of Telangana."
         }
     },
     # -------------------------------------------------------------------------
@@ -221,28 +221,28 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     # -------------------------------------------------------------------------
     {
         "id": "msmarco-ta-4001",
-        "query": "திருக்குறளை இயற்றியவர் யார் மற்றும் அதில் எத்தனை அதிகாரங்கள் உள்ளன?",
-        "passage_text": "திருக்குறளை இயற்றியவர் திருவள்ளுவர் ஆவார். இதில் மொத்தம் 133 அதிகாரங்களும், 1330 குறட்பாக்களும் உள்ளன. இது அறத்துப்பால், பொருட்பால், காமத்துப்பால் என்ற மூன்று பெரும் பிரிவுகளாக பிரிக்கப்பட்டுள்ளது.",
-        "answers": ["திருக்குறளை இயற்றியவர் திருவள்ளுவர். இதில் 133 அதிகாரங்கள் உள்ளன."],
+        "query": "தமிழ்நாட்டின் தலைநகரம் எது?",
+        "passage_text": "சென்னை தமிழ்நாட்டின் தலைநகரமும் இந்தியாவின் நான்காவது பெரிய பெருநகரமும் ஆகும். இது வங்காள விரிகுடாவின் கோரமண்டல் கடற்கரையில் அமைந்துள்ள ஒரு முக்கிய கலாச்சார, பொருளாதார மற்றும் கல்வி மையம்.",
+        "answers": ["சென்னை தமிழ்நாட்டின் தலைநகரம்."],
         "metadata": {
             "passage_id": "ta-pass-4001",
             "query_id": "ta-q-4001",
             "language": "ta",
-            "topic": "Literature & Culture",
-            "original_english": "Who wrote Tirukkural and how many chapters does it have?"
+            "topic": "Geography & State Capitals",
+            "original_english": "What is the capital of Tamil Nadu? Chennai is the capital of Tamil Nadu."
         }
     },
     {
         "id": "msmarco-ta-4002",
-        "query": "தமிழ்நாட்டின் தலைநகரம் எது?",
-        "passage_text": "சென்னை தமிழ்நாட்டின் தலைநகரமாகவும், இந்தியாவின் நான்காவது பெரிய பெருநகரமாகவும் விளங்குகிறது. இது வங்காள விரிகுடாவின் கோரமண்டல் கடற்கரையில் அமைந்துள்ளது மற்றும் 'தென்னிந்தியாவின் நுழைவாயில்' என்று அழைக்கப்படுகிறது.",
-        "answers": ["சென்னை தமிழ்நாட்டின் தலைநகரம்."],
+        "query": "திருக்குறளை இயற்றியவர் யார்?",
+        "passage_text": "திருக்குறள் என்பது உலகப் புகழ் பெற்ற தமிழ் நீதிநூல் ஆகும். இதனை இயற்றியவர் திருவள்ளுவர். இதில் அறத்துப்பால், பொருட்பால், காமத்துப்பால் என்ற மூன்று பிரிவுகளில் மொத்தம் 1330 குறட்பாக்கள் உள்ளன.",
+        "answers": ["திருக்குறளை இயற்றியவர் திருவள்ளுவர்."],
         "metadata": {
             "passage_id": "ta-pass-4002",
             "query_id": "ta-q-4002",
             "language": "ta",
-            "topic": "Geography & State Capitals",
-            "original_english": "What is the capital of Tamil Nadu?"
+            "topic": "Tamil Literature & History",
+            "original_english": "Who authored the Thirukkural? Thiruvalluvar authored Thirukkural."
         }
     },
     # -------------------------------------------------------------------------
@@ -250,21 +250,21 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     # -------------------------------------------------------------------------
     {
         "id": "msmarco-bn-5001",
-        "query": "ভারতের জাতীয় সঙ্গীত কে রচনা করেছিলেন?",
-        "passage_text": "ভারতের জাতীয় সঙ্গীত 'জন গণ মন' রবীন্দ্রনাথ ঠাকুর রচনা করেছিলেন। এটি মূলত ১৯১১ সালে রচিত হয়েছিল এবং ১৯৫০ সালের ২৪ জানুয়ারি আনুষ্ঠানিকভাবে ভারতের জাতীয় সঙ্গীত হিসেবে গৃহীত হয়।",
-        "answers": ["রবীন্দ্রনাথ ঠাকুর ভারতের জাতীয় সঙ্গীত রচনা করেছিলেন।"],
+        "query": "ভারতের জাতীয় সংগীত কে রচনা করেছিলেন?",
+        "passage_text": "ভারতের জাতীয় সংগীত 'জন গণ মন' নোবেল বিজয়ী কবিগুরু রবীন্দ্রনাথ ঠাকুর দ্বারা রচিত হয়েছিল। এটি প্রথম ১৯১১ সালের ২৭ ডিসেম্বর ভারতীয় জাতীয় কংগ্রেসের কলকাতা অধিবেশনে গাওয়া হয়েছিল।",
+        "answers": ["ভারতের জাতীয় সংগীত রবীন্দ্রনাথ ঠাকুর রচনা করেছিলেন।"],
         "metadata": {
             "passage_id": "bn-pass-5001",
             "query_id": "bn-q-5001",
             "language": "bn",
-            "topic": "National Heritage",
-            "original_english": "Who composed the National Anthem of India?"
+            "topic": "National Symbols & Culture",
+            "original_english": "Who composed the National Anthem of India? Rabindranath Tagore composed Jana Gana Mana."
         }
     },
     {
         "id": "msmarco-bn-5002",
-        "query": "পশ্চিমবঙ্গের রাজধানী কোনটি?",
-        "passage_text": "কলকাতা পশ্চিমবঙ্গের রাজধানী এবং পূর্ব ভারতের প্রধান বাণিজ্যিক, সাংস্কৃতিক ও শিক্ষাকেন্দ্র। এটি হুগলি নদীর পূর্ব তীরে অবস্থিত একটি ঐতিহাসিক শহর।",
+        "query": "পশ্চিমবঙ্গের রাজধানী কোথায়?",
+        "passage_text": "কলকাতা পশ্চিমবঙ্গের রাজধানী এবং পূর্ব ভারতের প্রধান বাণিজ্যিক ও সাংস্কৃতিক কেন্দ্র। এটি হুগলি নদীর পূর্ব তীরে অবস্থিত একটি ঐতিহাসিক শহর।",
         "answers": ["কলকাতা পশ্চিমবঙ্গের রাজধানী।"],
         "metadata": {
             "passage_id": "bn-pass-5002",
@@ -280,8 +280,8 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     {
         "id": "msmarco-mr-6001",
         "query": "महाराष्ट्राची राजधानी कोणती आहे?",
-        "passage_text": "मुंबई ही भारताच्या महाराष्ट्र राज्याची राजधानी असून ती भारताची आर्थिक राजधानी मानली जाते. मुंबई हे अरबी समुद्राच्या किनाऱ्यावर वसलेले भारतातील सर्वात मोठे महानगर आहे.",
-        "answers": ["मुंबई ही महाराष्ट्राची राजधानी आहे."],
+        "passage_text": "मुंबई ही भारताच्या महाराष्ट्र राज्याची राजधानी असून ती भारताची आर्थिक राजधानी मानली जाते. मुंबई हे अरबी समुद्राच्या किनार्यावर वसलेले भारतातील सर्वात मोठे महानगर आहे.",
+        "answers": ["मुंबई ही महाराष्ट्राची राजधानी आहे।"],
         "metadata": {
             "passage_id": "mr-pass-6001",
             "query_id": "mr-q-6001",
@@ -296,46 +296,14 @@ CURATED_MSMARCO_XI_SAMPLES: List[Dict[str, Any]] = [
     {
         "id": "msmarco-kn-7001",
         "query": "ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಯಾವುದು?",
-        "passage_text": "ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಮತ್ತು ಭಾರತದ ಪ್ರಮುಖ ಮಾಹಿತಿ ತಂತ್ರಜ್ಞಾನ (IT) ಕೇಂದ್ರವಾಗಿದೆ. ಇದನ್ನು ಭಾರತದ ಸಿಲಿಕಾನ್ ವ್ಯಾಲಿ ಎಂದು ಕರೆಯಲಾಗುತ್ತದೆ.",
+        "passage_text": "ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಮತ್ತು ಭಾರತದ ಪ್ರಮುಖ ಮಾಹಿತಿ ತಂತ್ರಜ್ಞಾನ (IT) ಕೇಂದ್ರವಾಗಿದೆ. ಇದನ್ನು ಭಾರತದ ಸಿಲಿಕಾನ್ ವ್ಯಾಲಿ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ.",
         "answers": ["ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ."],
         "metadata": {
             "passage_id": "kn-pass-7001",
             "query_id": "kn-q-7001",
             "language": "kn",
-            "topic": "Geography & Technology Hubs",
-            "original_english": "What is the capital of Karnataka? Bengaluru is the capital of Karnataka."
-        }
-    },
-    # -------------------------------------------------------------------------
-    # Gujarati (gu)
-    # -------------------------------------------------------------------------
-    {
-        "id": "msmarco-gu-8001",
-        "query": "ગુજરાતનું પાટનગર કયું છે?",
-        "passage_text": "ગાંધીનગર ગુજરાત રાજ્યનું પાટનગર છે, જેનું નામ રાષ્ટ્રપિતા મહಾત્મા ગાંધીના નામ પરથી રાખવામાં આવ્યું છે. તે સાબરમતી નદીના કિનારે આવેલું સુઆયોજಿತ શહેર છે.",
-        "answers": ["ગાંધીનગર ગુજરાતનું પાટનગર છે."],
-        "metadata": {
-            "passage_id": "gu-pass-8001",
-            "query_id": "gu-q-8001",
-            "language": "gu",
             "topic": "Geography & State Capitals",
-            "original_english": "What is the capital of Gujarat? Gandhinagar is the capital of Gujarat."
-        }
-    },
-    # -------------------------------------------------------------------------
-    # Malayalam (ml)
-    # -------------------------------------------------------------------------
-    {
-        "id": "msmarco-ml-9001",
-        "query": "കേരളത്തിന്റെ തലസ്ഥാനം ഏതാണ്?",
-        "passage_text": "തിരുവനന്തപുരം കേരളത്തിന്റെ തലസ്ഥാന നഗരമാണ്. പ്രശസ്തമായ പത്മനാഭസ്വാമി ക്ഷേത്രവും വിക്രം സാരാഭായ് സ്പേസ് സെന്ററും (VSSC) ഈ നഗരത്തിലാണ് സ്ഥിതി ചെയ്യുന്നത്.",
-        "answers": ["തിരുവനന്തപുരം കേരളത്തിന്റെ തലസ്ഥാനമാണ്."],
-        "metadata": {
-            "passage_id": "ml-pass-9001",
-            "query_id": "ml-q-9001",
-            "language": "ml",
-            "topic": "Geography & State Capitals",
-            "original_english": "What is the capital of Kerala?"
+            "original_english": "What is the capital of Karnataka?"
         }
     },
     # -------------------------------------------------------------------------
@@ -397,32 +365,33 @@ class DatasetLoader:
         self._initialize_dataset()
 
     def _initialize_dataset(self):
-        """Loads from local cache if exists, otherwise seeds curated MSMARCO-XI samples."""
+        """Loads cached records or seeds high-quality multilingual sample baseline."""
         if self.cache_file.exists():
             try:
                 with open(self.cache_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    self.documents = [DocumentRecord(**d) for d in data]
-                logger.info(f"Loaded {len(self.documents)} documents from cache: {self.cache_file}")
+                    self.documents = [DocumentRecord(**doc) for doc in data]
+                logger.info(f"Loaded {len(self.documents)} multilingual documents from cache: {self.cache_file}")
                 return
             except Exception as e:
-                logger.warning(f"Failed to read cache {self.cache_file}: {e}. Falling back to baseline.")
+                logger.warning(f"Failed to load cached corpus ({e}). Rebuilding baseline.")
 
-        # Seed baseline curated records
-        self.documents = [
-            DocumentRecord(
+        # Seed curated samples
+        for item in CURATED_MSMARCO_XI_SAMPLES:
+            doc = DocumentRecord(
                 id=item["id"],
                 query=item["query"],
                 passage_text=item["passage_text"],
                 answers=item.get("answers", []),
                 metadata=PassageMetadata(**item["metadata"])
             )
-            for item in CURATED_MSMARCO_XI_SAMPLES
-        ]
+            self.documents.append(doc)
+
         self._save_cache()
+        logger.info(f"Seeded {len(self.documents)} curated multilingual records across Hindi, English, Telugu, Tamil, Bengali, Marathi, Kannada, Punjabi, Odia, Urdu.")
 
     def _save_cache(self):
-        """Saves documents to cache file for fast restarts."""
+        """Persists document store to disk for instant zero-latency reloading."""
         try:
             with open(self.cache_file, "w", encoding="utf-8") as f:
                 json.dump([doc.model_dump() for doc in self.documents], f, ensure_ascii=False, indent=2)
@@ -433,39 +402,92 @@ class DatasetLoader:
     def load_from_huggingface(self, language: str = "hi", max_samples: int = 50, split: str = "train") -> int:
         """
         Loads and merges samples directly from HuggingFace ai4bharat/MSMARCO-XI.
-        Uses parquet files mapping for high-speed Indic language streaming.
+        Uses Polars to fetch and parse Parquet files directly from HuggingFace URLs,
+        with schema-agnostic extraction and fallback to HuggingFace datasets library.
         """
+        lang_key = language.lower().split("-")[0]
+        prefix = MSMARCO_XI_LANG_PREFIX.get(lang_key, "hin")
+        
+        # Check if train split is requested but missing (e.g., for Telugu "te")
+        actual_split = split
+        if lang_key == "te" and split == "train":
+            logger.info("Telugu ('te') does not have a 'train' split on HuggingFace. Falling back to 'validation' split.")
+            actual_split = "validation"
+
+        parquet_filename = f"{actual_split}/{prefix}{actual_split[:3]}.parquet"
+        parquet_url = f"https://huggingface.co/datasets/ai4bharat/MSMARCO-XI/resolve/main/{parquet_filename}"
+
+        rows = None
+
+        # Method 1: Use Polars for direct fast Parquet fetching (bypasses PyArrow nested dataset bugs)
         try:
-            from datasets import load_dataset
+            import polars as pl
+            logger.info(f"Attempting to fetch remote parquet table via Polars: {parquet_url}")
+            df = pl.read_parquet(parquet_url)
+            rows = df.head(max_samples).to_dicts()
+            logger.info(f"Successfully loaded {len(rows)} rows using Polars.")
+        except Exception as pe:
+            logger.warning(f"Polars remote fetch failed or not installed: {pe}. Falling back to datasets library.")
 
-            lang_key = language.lower().split("-")[0]
-            prefix = MSMARCO_XI_LANG_PREFIX.get(lang_key, "hin")
-            parquet_filename = f"{split}/{prefix}{split[:3]}.parquet"
-            parquet_url = f"https://huggingface.co/datasets/ai4bharat/MSMARCO-XI/resolve/main/{parquet_filename}"
-
-            logger.info(f"Loading ai4bharat/MSMARCO-XI ({language}) via {parquet_filename}...")
-
-            # Try streaming directly from parquet file
+        # Method 2: Fallback to datasets library (with streaming)
+        if rows is None:
             try:
-                hf_ds = load_dataset("parquet", data_files={split: parquet_url}, split=split, streaming=True)
-            except Exception:
-                # Fallback to standard dataset load syntax
-                hf_ds = load_dataset(settings.DATASET_NAME, data_files={split: parquet_filename}, split=split, streaming=True)
+                from datasets import load_dataset
+                logger.info(f"Loading ai4bharat/MSMARCO-XI ({language}) via datasets library streaming...")
+                
+                # Try streaming directly from parquet file
+                try:
+                    hf_ds = load_dataset("parquet", data_files={actual_split: parquet_url}, split=actual_split, streaming=True)
+                except Exception:
+                    # Fallback to standard dataset load syntax
+                    hf_ds = load_dataset(settings.DATASET_NAME, data_files={actual_split: parquet_filename}, split=actual_split, streaming=True)
 
-            count = 0
-            for row in hf_ds:
-                if count >= max_samples:
-                    break
-                query = row.get("query", "")
-                passages = row.get("passages", {})
-                passage_texts = passages.get("passage_text", [])
-                is_selected = passages.get("is_selected", [1] * len(passage_texts))
-                answers = row.get("answers", [])
+                rows = []
+                for idx, row in enumerate(hf_ds):
+                    if idx >= max_samples:
+                        break
+                    rows.append(row)
+            except Exception as de:
+                logger.error(f"Hugging Face datasets library fetch failed: {de}")
+                rows = []
+
+        # Parse rows robustly
+        count = 0
+        try:
+            for row in rows:
+                query = row.get("query") or ""
+                passages = row.get("passages") or {}
+                
+                # Schema-agnostic extraction of passages
+                # Handles 'Translated_passages', 'passage_text', and 'English_passages'
+                passage_texts = passages.get("Translated_passages") or passages.get("passage_text") or passages.get("English_passages") or []
+                
+                if isinstance(passage_texts, str):
+                    passage_texts = [passage_texts]
+                
+                # Extract 'is_selected' array
+                is_selected = passages.get("is_selected")
+                if is_selected is None:
+                    is_selected = [1] * len(passage_texts)
+                elif isinstance(is_selected, (int, float)):
+                    is_selected = [int(is_selected)]
+                
+                # Schema-agnostic extraction of answers
+                # Handles 'Answer', 'answers', and 'Eng_Answer'
+                raw_answer = row.get("Answer") or row.get("answers") or row.get("Eng_Answer") or []
+                if isinstance(raw_answer, str):
+                    answers = [raw_answer]
+                elif isinstance(raw_answer, list):
+                    answers = raw_answer
+                else:
+                    answers = []
 
                 for idx, text in enumerate(passage_texts):
                     if not text or len(text.strip()) < 10:
                         continue
-                    doc_id = f"hf-{lang_key}-{row.get('query_id', count)}-{idx}"
+                    query_id_val = row.get("query_id", count)
+                    doc_id = f"hf-{lang_key}-{query_id_val}-{idx}"
+                    
                     doc = DocumentRecord(
                         id=doc_id,
                         query=query,
@@ -473,7 +495,7 @@ class DatasetLoader:
                         answers=answers if idx == 0 else [],
                         metadata=PassageMetadata(
                             passage_id=f"p-{lang_key}-{count}-{idx}",
-                            query_id=str(row.get("query_id", count)),
+                            query_id=str(query_id_val),
                             language=lang_key,
                             is_selected=bool(is_selected[idx]) if idx < len(is_selected) else True,
                             topic="MSMARCO-XI Streamed",
@@ -484,11 +506,15 @@ class DatasetLoader:
                     count += 1
                     break  # Take primary passage per query for balanced density
 
-            self._save_cache()
-            logger.info(f"Successfully ingested {count} samples from Hugging Face for lang {language}")
-            return count
-        except Exception as e:
-            logger.warning(f"Hugging Face ingestion notice ({e}). Maintained {len(self.documents)} cached multilingual records.")
+            if count > 0:
+                self._save_cache()
+                logger.info(f"Successfully ingested {count} samples from Hugging Face for lang {language}")
+                return count
+            else:
+                logger.warning(f"No valid records found in fetched data for lang {language}.")
+                return 0
+        except Exception as parse_err:
+            logger.error(f"Error parsing records: {parse_err}. Maintained {len(self.documents)} cached records.")
             return 0
 
     def add_custom_document(self, query: str, passage: str, language: str = "hi", answers: Optional[List[str]] = None, topic: str = "custom") -> DocumentRecord:
@@ -500,11 +526,11 @@ class DatasetLoader:
             passage_text=passage,
             answers=answers or [],
             metadata=PassageMetadata(
-                passage_id=f"p-{doc_id}",
-                query_id=f"q-{doc_id}",
+                passage_id=f"p-{language}-{len(self.documents) + 1}",
+                query_id=f"q-{language}-{len(self.documents) + 1}",
                 language=language,
                 topic=topic,
-                source=settings.DATASET_NAME
+                source="User Dynamic Ingestion"
             )
         )
         self.documents.append(doc)
@@ -516,16 +542,17 @@ class DatasetLoader:
 
     def get_stats(self) -> Dict[str, Any]:
         lang_counts: Dict[str, int] = {}
-        for d in self.documents:
-            l = d.metadata.language
+        for doc in self.documents:
+            l = doc.metadata.language
             lang_counts[l] = lang_counts.get(l, 0) + 1
+
         return {
             "total_documents": len(self.documents),
             "languages": lang_counts,
-            "supported_indic_languages": list(MSMARCO_XI_LANG_PREFIX.keys()) + ["en"],
-            "source": settings.DATASET_NAME,
+            "languages_covered": list(lang_counts.keys()),
+            "distribution": lang_counts,
             "cache_file": str(self.cache_file)
         }
 
-# Global Singleton instance
+# Global singleton instance
 dataset_loader = DatasetLoader()

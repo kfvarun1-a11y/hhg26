@@ -241,9 +241,9 @@ class HybridVectorStore:
             self.is_indexed = False
             return 0.0
 
-        # Precompute rich contexts list
+        # Precompute rich contexts list using full parent passage whenever available
         self.contexts = [
-            c.parent_text if (c.strategy == "hierarchical_parent_child" and c.parent_text) else c.text
+            c.parent_text if c.parent_text else c.text
             for c in chunks
         ]
 
