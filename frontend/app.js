@@ -5,6 +5,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================================================================
+  // API Configuration (Supports relative path or remote backend)
+  // =========================================================================
+  const API_BASE = window.API_BASE_URL || "";
+
+  // =========================================================================
   // State & Global Variables
   // =========================================================================
   let audioContext = null;
@@ -276,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activeStrategySelect.addEventListener("change", async (e) => {
     activeStrategy = e.target.value;
     try {
-      await fetch("/api/switch-strategy", {
+      await fetch(`${API_BASE}/api/switch-strategy`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ strategy: activeStrategy })
@@ -327,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("llm_provider", "fast_synthesizer");
 
     try {
-      const resp = await fetch("/api/voice-query", {
+      const resp = await fetch(`${API_BASE}/api/voice-query`, {
         method: "POST",
         body: formData
       });

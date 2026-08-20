@@ -406,10 +406,27 @@ def add_custom_dataset_document(req: AddDocumentRequest):
 # Serve Frontend static assets
 if FRONTEND_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
+    if (FRONTEND_DIR / "assets").exists():
+        app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIR / "assets")), name="assets")
+
+@app.get("/index.css")
+def serve_index_css():
+    css_path = FRONTEND_DIR / "index.css"
+    if css_path.exists():
+        return FileResponse(str(css_path), media_type="text/css")
+    return JSONResponse(status_code=404, content={"detail": "Not found"})
+
+@app.get("/app.js")
+def serve_app_js():
+    js_path = FRONTEND_DIR / "app.js"
+    if js_path.exists():
+        return FileResponse(str(js_path), media_type="application/javascript")
+    return JSONResponse(status_code=404, content={"detail": "Not found"})
 
 @app.get("/")
 def serve_index():
     index_path = FRONTEND_DIR / "index.html"
     if index_path.exists():
         return FileResponse(str(index_path))
-    return {"message": "Voice RAG API is running. Frontend static directory is being assembled."}
+    return {"message": "Voice RAG API is running."}
+
